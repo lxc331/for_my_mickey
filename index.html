@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>可爱问候</title>
+    <title>超级可爱问候</title>
     <style>
         body {
             margin: 0;
@@ -13,139 +13,266 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #ffd1dc, #a2d2ff);
+            background: linear-gradient(135deg, #ffd1dc, #a2d2ff, #ffafcc);
             font-family: 'Comic Sans MS', cursive, sans-serif;
             overflow: hidden;
+            position: relative;
         }
 
         .container {
             text-align: center;
             position: relative;
-            z-index: 2;
+            z-index: 10;
         }
 
         .cartoon-character {
-            width: 200px;
-            height: 200px;
+            width: 250px;
+            height: 300px;
             position: relative;
             margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .cartoon-character:hover {
+            transform: scale(1.05);
         }
 
         .head {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             background-color: #ffb6c1;
             border-radius: 50%;
             position: absolute;
-            top: 25px;
-            left: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            top: 20px;
+            left: 35px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            overflow: hidden;
         }
 
-        .eye {
-            width: 25px;
-            height: 25px;
-            background-color: #fff;
+        .blush {
+            width: 30px;
+            height: 15px;
+            background-color: rgba(255, 182, 193, 0.6);
             border-radius: 50%;
-            position: absolute;
-            top: 60px;
-            animation: blink 4s infinite;
-        }
-
-        .eye.left {
-            left: 50px;
-        }
-
-        .eye.right {
-            right: 50px;
-        }
-
-        .pupil {
-            width: 12px;
-            height: 12px;
-            background-color: #333;
-            border-radius: 50%;
-            position: absolute;
-            top: 6px;
-            left: 6px;
-        }
-
-        .mouth {
-            width: 60px;
-            height: 30px;
-            border-bottom: 5px solid #ff6b6b;
-            border-radius: 0 0 50% 50%;
             position: absolute;
             top: 100px;
-            left: 70px;
-            animation: smile 3s infinite;
         }
 
-        .body {
-            width: 120px;
-            height: 100px;
-            background-color: #ffb6c1;
-            border-radius: 50% 50% 40% 40%;
-            position: absolute;
-            top: 130px;
+        .blush.left {
             left: 40px;
         }
 
-        .arm {
-            width: 20px;
+        .blush.right {
+            right: 40px;
+        }
+
+        .ear {
+            width: 40px;
             height: 60px;
             background-color: #ffb6c1;
+            border-radius: 50%;
             position: absolute;
-            top: 140px;
-            border-radius: 10px;
+            top: -10px;
+        }
+
+        .ear.left {
+            left: -10px;
+            transform: rotate(-20deg);
+        }
+
+        .ear.right {
+            right: -10px;
+            transform: rotate(20deg);
+        }
+
+        .eye {
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 70px;
+            animation: blink 4s infinite;
+            cursor: pointer;
+        }
+
+        .eye.left {
+            left: 60px;
+        }
+
+        .eye.right {
+            right: 60px;
+        }
+
+        .pupil {
+            width: 15px;
+            height: 15px;
+            background-color: #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 7px;
+            left: 7px;
+            transition: all 0.2s ease;
+        }
+
+        .eye:hover .pupil {
+            transform: scale(1.2);
+        }
+
+        .nose {
+            width: 15px;
+            height: 10px;
+            background-color: #ff9eb5;
+            border-radius: 50%;
+            position: absolute;
+            top: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .mouth {
+            width: 70px;
+            height: 35px;
+            border-bottom: 5px solid #ff6b6b;
+            border-radius: 0 0 50% 50%;
+            position: absolute;
+            top: 130px;
+            left: 55px;
+            animation: smile 3s infinite, giggle 2s infinite 1s;
+        }
+
+        .tongue {
+            width: 20px;
+            height: 10px;
+            background-color: #ff9eb5;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            top: 155px;
+            left: 85px;
+            opacity: 0;
+            animation: showTongue 4s infinite;
+        }
+
+        .body {
+            width: 140px;
+            height: 120px;
+            background-color: #ffb6c1;
+            border-radius: 50% 50% 40% 40%;
+            position: absolute;
+            top: 180px;
+            left: 55px;
+        }
+
+        .arm {
+            width: 25px;
+            height: 80px;
+            background-color: #ffb6c1;
+            position: absolute;
+            top: 190px;
+            border-radius: 12px;
             animation: wave 2s infinite alternate;
+            cursor: pointer;
         }
 
         .arm.left {
-            left: 20px;
+            left: 30px;
             transform-origin: top center;
         }
 
         .arm.right {
-            right: 20px;
+            right: 30px;
             transform-origin: top center;
+        }
+
+        .arm:hover {
+            transform: rotate(30deg);
+        }
+
+        .leg {
+            width: 30px;
+            height: 40px;
+            background-color: #ffb6c1;
+            position: absolute;
+            bottom: -30px;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .leg.left {
+            left: 60px;
+            animation: danceLeft 3s infinite;
+        }
+
+        .leg.right {
+            right: 60px;
+            animation: danceRight 3s infinite;
+        }
+
+        .hat {
+            width: 100px;
+            height: 50px;
+            background-color: #ff9eb5;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            top: -20px;
+            left: 75px;
+            animation: hatBob 4s infinite;
+        }
+
+        .hat-star {
+            width: 20px;
+            height: 20px;
+            background-color: #ffcc00;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            position: absolute;
+            top: 15px;
+            left: 40px;
         }
 
         .message-box {
             background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 25px;
+            padding: 25px;
             margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            min-height: 60px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            min-height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
+            max-width: 80%;
+            transition: all 0.3s ease;
         }
 
         .message-text {
-            font-size: 18px;
+            font-size: 20px;
             color: #ff6b6b;
             font-weight: bold;
             text-align: center;
             line-height: 1.4;
+            transition: all 0.3s ease;
         }
 
-        .greeting-btn {
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .greeting-btn, .dance-btn, .jump-btn {
             background-color: #ff6b6b;
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 18px;
+            padding: 12px 20px;
+            font-size: 16px;
             border-radius: 25px;
             cursor: pointer;
-            margin-top: 20px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
             font-family: 'Comic Sans MS', cursive, sans-serif;
         }
 
-        .greeting-btn:hover {
+        .greeting-btn:hover, .dance-btn:hover, .jump-btn:hover {
             background-color: #ff5252;
             transform: scale(1.05);
         }
@@ -157,6 +284,7 @@
             background-color: #ff6b6b;
             transform: rotate(-45deg);
             animation: float 5s infinite;
+            z-index: 1;
         }
 
         .heart:before, .heart:after {
@@ -178,23 +306,60 @@
             left: 10px;
         }
 
+        .star {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #ffcc00;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: starFloat 6s infinite;
+            z-index: 1;
+        }
+
         @keyframes blink {
             0%, 45%, 50%, 55%, 100% {
-                height: 25px;
+                height: 30px;
             }
             48%, 52% {
-                height: 2px;
+                height: 3px;
             }
         }
 
         @keyframes smile {
             0%, 100% {
+                width: 70px;
+                height: 35px;
+            }
+            50% {
                 width: 60px;
                 height: 30px;
             }
-            50% {
-                width: 50px;
-                height: 25px;
+        }
+
+        @keyframes giggle {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-2px);
+            }
+            75% {
+                transform: translateX(2px);
+            }
+        }
+
+        @keyframes showTongue {
+            0%, 30%, 100% {
+                opacity: 0;
+                transform: translateY(0);
+            }
+            35% {
+                opacity: 1;
+                transform: translateY(-5px);
+            }
+            40% {
+                opacity: 0;
+                transform: translateY(-10px);
             }
         }
 
@@ -204,6 +369,33 @@
             }
             100% {
                 transform: rotate(20deg);
+            }
+        }
+
+        @keyframes danceLeft {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes danceRight {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes hatBob {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
             }
         }
 
@@ -223,35 +415,96 @@
                 opacity: 0;
             }
         }
+
+        @keyframes starFloat {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes jump {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes colorChange {
+            0% { background-color: #ffb6c1; }
+            25% { background-color: #a2d2ff; }
+            50% { background-color: #ffd1dc; }
+            75% { background-color: #ffafcc; }
+            100% { background-color: #ffb6c1; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="cartoon-character">
-            <div class="head"></div>
-            <div class="eye left">
-                <div class="pupil"></div>
+        <div class="cartoon-character" id="character">
+            <div class="hat">
+                <div class="hat-star"></div>
             </div>
-            <div class="eye right">
-                <div class="pupil"></div>
+            <div class="head">
+                <div class="ear left"></div>
+                <div class="ear right"></div>
+                <div class="blush left"></div>
+                <div class="blush right"></div>
+                <div class="eye left" onclick="wink(this)">
+                    <div class="pupil"></div>
+                </div>
+                <div class="eye right" onclick="wink(this)">
+                    <div class="pupil"></div>
+                </div>
+                <div class="nose"></div>
+                <div class="mouth"></div>
+                <div class="tongue"></div>
             </div>
-            <div class="mouth"></div>
             <div class="body"></div>
-            <div class="arm left"></div>
-            <div class="arm right"></div>
+            <div class="arm left" onclick="waveArm(this)"></div>
+            <div class="arm right" onclick="waveArm(this)"></div>
+            <div class="leg left"></div>
+            <div class="leg right"></div>
         </div>
         
-        <div class="message-box">
-            <div class="message-text">点击下方按钮获取专属祝福！</div>
+        <div class="message-box" id="messageBox">
+            <div class="message-text" id="messageText">点击按钮和Marvel哥互动吧！</div>
         </div>
         
-        <button class="greeting-btn">发送祝福</button>
+        <div class="controls">
+            <button class="greeting-btn" onclick="showGreeting()">发送祝福</button>
+            <button class="dance-btn" onclick="startDance()">跳舞</button>
+            <button class="jump-btn" onclick="makeJump()">跳跃</button>
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const character = document.getElementById('character');
             const greetingBtn = document.querySelector('.greeting-btn');
-            const messageText = document.querySelector('.message-text');
+            const messageText = document.getElementById('messageText');
+            const messageBox = document.getElementById('messageBox');
             
             // 预设的祝福语列表
             const greetings = [
@@ -262,14 +515,16 @@
                 "希望你永远快乐！",
                 "你是最棒的！",
                 "愿所有美好都围绕着你！",
-                "今天也要开心哦！"
+                "今天也要开心哦！",
+                "你笑起来真好看！",
+                "每天想你一点点！",
+                "你是我的小可爱！",
+                "愿时光不老，美好不散！"
             ];
             
-            greetingBtn.addEventListener('click', function() {
-                // 随机选择一条祝福语
+            // 显示祝福语
+            window.showGreeting = function() {
                 const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
-                
-                // 显示祝福语
                 messageText.textContent = randomGreeting;
                 
                 // 添加点击反馈动画
@@ -280,16 +535,97 @@
                 
                 // 创建飘浮的心形
                 createHearts();
-            });
+            };
+            
+            // 眨眼函数
+            window.wink = function(eye) {
+                const pupil = eye.querySelector('.pupil');
+                pupil.style.transform = 'scale(0.5)';
+                setTimeout(() => {
+                    pupil.style.transform = 'scale(1)';
+                }, 200);
+                
+                // 显示一个小星星
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = (eye.getBoundingClientRect().left + window.scrollX) + 'px';
+                star.style.top = (eye.getBoundingClientRect().top + window.scrollY - 30) + 'px';
+                star.style.animationDuration = (Math.random() * 2 + 4) + 's';
+                document.body.appendChild(star);
+                
+                setTimeout(() => {
+                    star.remove();
+                }, 6000);
+            };
+            
+            // 手臂挥舞函数
+            window.waveArm = function(arm) {
+                arm.style.animation = 'none';
+                void arm.offsetWidth; // Trigger reflow
+                arm.style.animation = 'wave 0.5s infinite alternate';
+                
+                // 创建心形
+                createHearts();
+                
+                // 恢复原始动画
+                setTimeout(() => {
+                    arm.style.animation = 'wave 2s infinite alternate';
+                }, 3000);
+            };
+            
+            // 开始跳舞
+            window.startDance = function() {
+                const legs = document.querySelectorAll('.leg');
+                legs.forEach(leg => {
+                    leg.style.animation = 'none';
+                    void leg.offsetWidth; // Trigger reflow
+                    leg.style.animation = 'danceLeft 0.5s infinite, colorChange 2s infinite';
+                });
+                
+                messageText.textContent = "Marvel哥要开始跳舞给Mickey姐看啦！";
+                
+                // 恢复原始动画
+                setTimeout(() => {
+                    legs.forEach(leg => {
+                        leg.style.animation = leg.classList.contains('left') ? 'danceLeft 3s infinite' : 'danceRight 3s infinite';
+                    });
+                    // Remove the color change animation after dancing
+                    legs.forEach(leg => {
+                        leg.style.animation = leg.classList.contains('left') ? 'danceLeft 3s infinite' : 'danceRight 3s infinite';
+                    });
+                }, 5000);
+            };
+            
+            // 跳跃函数
+            window.makeJump = function() {
+                character.style.animation = 'none';
+                void character.offsetWidth; // Trigger reflow
+                character.style.animation = 'jump 0.6s ease';
+                
+                messageText.textContent = "哇！跳得好高！";
+                
+                // 恢复原始状态
+                setTimeout(() => {
+                    character.style.animation = 'none';
+                }, 600);
+                
+                // 创建更多心形
+                for (let i = 0; i < 10; i++) {
+                    setTimeout(() => {
+                        createHearts();
+                    }, i * 100);
+                }
+            };
             
             // 创建飘浮的心形函数
             function createHearts() {
-                for (let i = 0; i < 5; i++) {
+                for (let i = 0; i < 3; i++) {
                     const heart = document.createElement('div');
                     heart.classList.add('heart');
                     
                     // 随机位置
-                    heart.style.left = Math.random() * window.innerWidth + 'px';
+                    heart.style.left = (Math.random() * window.innerWidth) + 'px';
+                    heart.style.top = window.innerHeight + 'px';
                     heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
                     heart.style.width = (Math.random() * 15 + 10) + 'px';
                     heart.style.height = heart.style.width;
@@ -302,6 +638,13 @@
                     }, 5000);
                 }
             }
+            
+            // 点击角色整体也可以互动
+            character.addEventListener('click', function(e) {
+                if (!e.target.closest('.eye') && !e.target.closest('.arm')) {
+                    makeJump();
+                }
+            });
         });
     </script>
 </body>
